@@ -46,6 +46,7 @@ import pascal.taie.analysis.pta.plugin.invokedynamic.Java9StringConcatHandler;
 import pascal.taie.analysis.pta.plugin.invokedynamic.LambdaAnalysis;
 import pascal.taie.analysis.pta.plugin.natives.NativeModeller;
 import pascal.taie.analysis.pta.plugin.reflection.ReflectionAnalysis;
+import pascal.taie.analysis.pta.plugin.taint.DCTaintAnalysis;
 import pascal.taie.analysis.pta.plugin.taint.TaintAnalysis;
 import pascal.taie.analysis.pta.toolkit.CollectionMethods;
 import pascal.taie.analysis.pta.toolkit.mahjong.Mahjong;
@@ -152,7 +153,13 @@ public class PointerAnalysis extends ProgramAnalysis<PointerAnalysisResult> {
             plugin.addPlugin(new InvokeDynamicAnalysis());
         }
         if (options.getString("taint-config") != null) {
-            plugin.addPlugin(new TaintAnalysis());
+//            plugin.addPlugin(new TaintAnalysis());
+            boolean dynamicConfigured = true;
+            if (dynamicConfigured) {
+                plugin.addPlugin(new DCTaintAnalysis());
+            } else {
+                plugin.addPlugin(new TaintAnalysis());
+            }
         }
         plugin.addPlugin(new ResultProcessor());
         // add plugins specified in options
