@@ -89,7 +89,7 @@ public class TaintTest {
                             + "implicit-entries:false;"
                             + "only-app:true;"
                             + "distinguish-string-constants:all;"
-                            + "interactive-taint-analysis:true;"
+                            + "taint-interactive:true;"
                             + TAINT_CONFIG
             );
         } finally {
